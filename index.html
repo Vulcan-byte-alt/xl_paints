@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XL Coatings - Advanced Nano Technology</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #0A0A0A, #1A1A1A);
+    }
+
+    .hero-gradient {
+      background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
+    }
+
+    .glass-nav {
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gradient-border {
+      position: relative;
+      border: 1px solid transparent;
+      background: linear-gradient(#0A0A0A, #0A0A0A) padding-box,
+        linear-gradient(45deg, #FFD700, transparent) border-box;
+    }
+
+    .feature-card {
+      background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    .product-card {
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.5s ease;
+      transform-style: preserve-3d;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    .blog-card {
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.9));
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .button-gradient {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      transition: all 0.3s ease;
+      /* remove button default style */
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .button-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .section-spacing {
+      padding: 120px 0;
+    }
+
+    .parallax {
+      transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .testimonial-card {
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: scale(1.02);
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0A0A0A;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 215, 0, 0.3);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 215, 0, 0.5);
+    }
+
+    /* Magnetic Button Effect */
+    .magnetic-button {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    /* Loading animation */
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-spinner {
+      animation: loading 1s linear infinite;
+    }
+
+    /* Parallax mouse effect */
+    .mouse-parallax {
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
+    }
+
+    .parallax-layer {
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Smooth reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.4s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      height: 3px;
+      background: linear-gradient(to right, #FFD700, #FFA500);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    /* Cursor follower */
+    .cursor-follower {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 215, 0, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+
+    /* Section Content visibility */
+    .section-content {
+      opacity: 1 !important;
+      /* Force sections to be visible */
+      display: block !important;
+    }
+
+    /* Modify reveal class to ensure elements are visible by default */
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-content.hidden {
+      opacity: 0;
+    }
+
+    @keyframes lineFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-line {
+      opacity: 0;
+      animation: lineFadeIn 0.6s ease-out forwards;
+    }
+
+    /* Default styling */
+    .hover-zoom {
+      transition: transform 0.5s ease-in-out;
+      /* Smooth zoom effect */
+      transform: scale(1);
+      /* Default scale */
+    }
+
+    /* On hover, apply zoom */
+    .hover-zoom:hover {
+      transform: scale(1.1);
+      /* Adjust scale for the desired zoom level */
+    }
+
+    .group:hover .zoom-hover {
+      transform: scale(1.1);
+      /* Adjust the scale factor as necessary */
+    }
+
+
+    /* Frosted Glass Effect */
+    .glassy-box {
+      background-color: rgba(255, 255, 255, 0.108);
+      /* Translucent white background */
+      backdrop-filter: blur(10px);
+      /* Apply blur effect on the background */
+      border: 1px solid rgba(255, 255, 255, 0.204);
+      /* Subtle border */
+      padding: 2rem;
+      /* Adjust padding as needed */
+      border-radius: 1rem;
+      /* Rounded corners */
+      margin-top: 2rem;
+      /* Space above the container */
+    }
+
+    /* Client Carousel Styling */
+    .client-carousel {
+      display: flex;
+      gap: 2rem;
+      white-space: nowrap;
+      transition: transform 0.5s ease;
+    }
+
+    .client-carousel img {
+      max-height: 100px;
+      object-contain: contain;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    .client-carousel .client-item {
+      flex-shrink: 0;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .client-carousel .client-item:hover {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body class="text-white">
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="scrollProgress"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-follower hidden md:block" id="cursorFollower"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center h-20">
+        <div class="relative w-full max-w-xs">
+          <img src="logo.jpg" alt="XL Coatings" class="w-32 h-8 rounded-lg">
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Home</a>
+          <a href="#about" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">About</a>
+          <a href="#products" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Products</a>
+          <a href="#features" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Features</a>
+          <a href="#gallery" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Gallery</a>
+          <a href="#blog" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Blog</a>
+          <a href="#contact" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Contact</a>
+        </div>
+        <button class="button-gradient magnetic-button text-black px-6 py-2 rounded-full font-medium">
+          Get Started
+        </button>
+        <button class="md:hidden text-yellow-400" id="mobileMenuButton">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-black/95 z-50 p-6">
+    <button class="absolute top-6 right-6 text-yellow-400" id="closeMenuButton">
+      <i class="fas fa-times text-2xl"></i>
+    </button>
+    <div class="flex flex-col space-y-6 mt-20">
+      <a href="#home" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Home</a>
+      <a href="#about" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">About</a>
+      <a href="#products" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Products</a>
+      <a href="#features" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Features</a>
+      <a href="#gallery" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Gallery</a>
+      <a href="#blog" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Blog</a>
+      <a href="#contact" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Contact</a>
+    </div>
+  </div>
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center pt-20 hero-gradient relative">
+    <div id="particles-js" class="absolute inset-0"></div>
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <!-- Text Section -->
+      <div class="z-10 order-2 md:order-1 animate-power">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <span class="block animate-line" style="animation-delay: 0.2s;margin-bottom: 10px;">
+            Future of
+          </span>
+          <span class="block animate-line" style="animation-delay: 0.4s;margin-bottom: 10px;">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+              Coating
+            </span>
+          </span>
+          <span class="block animate-line" style="animation-delay: 0.6s;">
+            Technology
+          </span>
+        </h1>
+        <p class="text-xl text-gray-400 mb-8 animate-line" style="animation-delay: 0.8s;">
+          Advanced nano-technology solutions for superior protection and performance.
+        </p>
+        <div class="flex gap-4">
+          <button class="button-gradient magnetic-button text-black px-8 py-4 rounded-full font-medium animate-line"
+            style="animation-delay: 1s;">
+            Explore Products
+          </button>
+          <button
+            class="bg-white/10 text-white px-8 py-4 rounded-full font-medium hover:bg-white/20 transition-all duration-300 animate-line"
+            style="animation-delay: 1.2s;">
+            Learn More
+          </button>
+        </div>
+      </div>
+      <!-- Image Section -->
+      <div class="relative z-10 order-1 md:order-2">
+        <div class="parallax-layer">
+          <img src="excel.png" alt="Nano Technology" class="w-full rounded-2xl hover-zoom">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="about" class="section-spacing">
+    <div class="max-w-7xl mx-auto px-6 section-content hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-2">
+            About Us
+          </p>
+          <h2 class="text-4xl font-bold mb-6">Our Story</h2>
+          <p class="text-gray-400 mb-8">
+            Since 2001, XL Coatings has been pioneering nano-technology coating solutions. Our journey began with a
+            vision to revolutionize surface protection through innovation.
+          </p>
+          <div class="space-y-6">
+            <div class="feature-card p-6 rounded-xl">
+              <h3 class="text-xl font-semibold mb-2 text-yellow-400">Innovation First</h3>
+              <p class="text-gray-400">Constantly pushing boundaries in nano-technology research and development.</p>
+            </div>
+            <div class="feature-card p-6 rounded-xl">
+              <h3 class="text-xl font-semibold mb-2 text-yellow-400">Global Impact</h3>
+              <p class="text-gray-400">Serving clients across 20+ countries with cutting-edge coating solutions.</p>
+            </div>
+          </div>
+          <!-- Counter Section in a Glassy Box -->
+          <div class="glassy-box">
+            <div class="grid grid-cols-3 gap-8 text-center">
+              <div>
+                <h3 class="text-4xl font-bold text-yellow-400" id="counter1">0</h3>
+                <p class="text-gray-400">Years in Business</p>
+              </div>
+              <div>
+                <h3 class="text-4xl font-bold text-yellow-400" id="counter2">0</h3>
+                <p class="text-gray-400">Countries Served</p>
+              </div>
+              <div>
+                <h3 class="text-4xl font-bold text-yellow-400" id="counter3">0</h3>
+                <p class="text-gray-400">Projects Completed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mouse-parallax reveal">
+          <img src="about.png" alt="About Us" class="rounded-2xl shadow-2xl hover-zoom  ">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Products Section -->
+  <section id="products" class="section-spacing bg-black/30">
+    <div class="max-w-7xl mx-auto px-6 section-content hidden">
+      <div class="text-center mb-16 reveal">
+        <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-2">
+          Products
+        </p>
+        <h2 class="text-4xl font-bold mb-4">Our Solutions</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Discover our range of advanced coating solutions designed for various
+          applications.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productCards">
+        <!-- Product cards will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section-spacing">
+    <div class="max-w-7xl mx-auto px-6 section-content hidden">
+      <!-- Headers -->
+      <div class="mb-12 text-center">
+        <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-4">
+          Features
+        </p>
+        <h2 class="text-4xl font-bold mb-4 ">Why Choose Us?</h2>
+      </div>
+
+      <!-- Feature Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="feature-card p-8 rounded-2xl reveal">
+          <div class="text-yellow-400 mb-4">
+            <i class="fas fa-shield-alt text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Superior Protection</h3>
+          <p class="text-gray-400">Advanced nano-technology providing unmatched surface protection.</p>
+        </div>
+        <div class="feature-card p-8 rounded-2xl reveal">
+          <div class="text-yellow-400 mb-4">
+            <i class="fas fa-leaf text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Eco-Friendly</h3>
+          <p class="text-gray-400">Sustainable solutions that are safe for the environment.</p>
+        </div>
+        <div class="feature-card p-8 rounded-2xl reveal">
+          <div class="text-yellow-400 mb-4">
+            <i class="fas fa-clock text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Long-Lasting</h3>
+          <p class="text-gray-400">Durable protection that stands the test of time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section-spacing bg-black/30">
+    <div class="max-w-7xl mx-auto px-6 section-content hidden">
+      <div class="text-center mb-16 reveal">
+        <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-4">Explore Our Work</p>
+        <h2 class="text-4xl font-bold mb-6">Project Gallery</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Explore our successful implementations across various industries.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="relative group overflow-hidden rounded-2xl reveal">
+          <img src="gallery1.png" alt="Project 1"
+            class="w-full transform transition-transform duration-500 group-hover:scale-110 zoom-hover">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+            <div class="p-6 bg-black bg-opacity-50">
+              <h3 class="text-xl font-bold mb-2 text-yellow-400">Industrial Coating</h3>
+              <p class="text-gray-300">Advanced protection for industrial equipment</p>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="relative group overflow-hidden rounded-2xl reveal">
+          <img src="gallery2.png" alt="Project 2"
+            class="w-full transform transition-transform duration-500 group-hover:scale-110 zoom-hover">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+            <div class="p-6 bg-black bg-opacity-50">
+              <h3 class="text-xl font-bold mb-2 text-yellow-400">Automotive Solutions</h3>
+              <p class="text-gray-300">Premium protection for vehicles ensuring peace of mind</p>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="relative group overflow-hidden rounded-2xl reveal">
+          <img src="gallery3.png" alt="Project 3"
+            class="w-full transform transition-transform duration-500 group-hover:scale-110 zoom-hover">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+            <div class="p-6 bg-black bg-opacity-50">
+              <h3 class="text-xl font-bold mb-2 text-yellow-400">Architectural Coating</h3>
+              <p class="text-gray-300">Building protection solutions for architectural marvels</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Blog Section -->
+  <section id="blog" class="section-spacing">
+    <div class="max-w-7xl mx-auto px-6 section-content hidden">
+      <div class="text-center mb-16 reveal">
+        <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-4 ">
+          Stay Updated
+        </p>
+        <h2 class="text-4xl font-bold mb-4">Latest Insights</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Stay updated with our latest news and innovations.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="blog-card rounded-2xl overflow-hidden reveal">
+          <img src="nano.png" alt="Blog 1" class="w-full">
+          <div class="p-6">
+            <div class="text-yellow-400 text-sm mb-2">Technology</div>
+            <h3 class="text-xl font-bold mb-3">The Future of Nano-Coating Technology</h3>
+            <p class="text-gray-400 mb-4">Exploring the latest innovations in coating solutions...</p>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300 flex items-center">
+              Read More
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        <div class="blog-card rounded-2xl overflow-hidden reveal">
+          <img src="sustainable.png" alt="Blog 2" class="w-full">
+          <div class="p-6">
+            <div class="text-yellow-400 text-sm mb-2">Industry</div>
+            <h3 class="text-xl font-bold mb-3">Sustainable Coating Solutions</h3>
+            <p class="text-gray-400 mb-4">How eco-friendly coatings are changing the industry...</p>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300 flex items-center">
+              Read More
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        <div class="blog-card rounded-2xl overflow-hidden reveal">
+          <img src="heat.png" alt="Blog 3" class="w-full">
+          <div class="p-6">
+            <div class="text-yellow-400 text-sm mb-2">Research</div>
+            <h3 class="text-xl font-bold mb-3">Breakthrough in Heat Reflection</h3>
+            <p class="text-gray-400 mb-4">New developments in thermal coating technology...</p>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300 flex items-center">
+              Read More
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Section -->
+  <section id="clients" class="section-spacing bg-black/30">
+    <div class="max-w-7xl mx-auto px-6 section-content">
+      <div class="text-center mb-16 reveal">
+        <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-4">
+          Trusted By
+        </p>
+        <h2 class="text-4xl font-bold mb-6">Our Clients</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">We are proud to partner with top companies across various industries.
+        </p>
+      </div>
+      <!-- Client logos in a carousel -->
+      <div class="relative overflow-hidden">
+        <div class="client-carousel flex gap-12 justify-center items-center">
+          <!-- Client 1 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="caterpillar.png" alt="Client 1"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Client 2 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="bhel.png" alt="Client 2"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Client 3 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="aditya.png" alt="Client 3"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Client 4 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="dupont.png" alt="Client 4"
+              class="w-40 h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Certifications and Awards Section -->
+  <section id="certifications" class="section-spacing bg-black/30">
+    <div class="max-w-7xl mx-auto px-6 section-content">
+      <div class="text-center mb-16 reveal">
+        <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-4">
+          Recognized & Certified
+        </p>
+        <h2 class="text-4xl font-bold mb-6">Our Certifications & Awards</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">We are proud to have received multiple certifications and awards in
+          recognition of our excellence.</p>
+      </div>
+      <!-- Certifications and Awards Logos in a translucent box carousel -->
+      <div class="relative overflow-hidden bg-opacity-10 bg-white p-8 rounded-xl shadow-lg">
+        <div class="certifications-carousel flex gap-20 justify-center items-center flex-wrap">
+          <!-- Certification 1 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="certification1.png" alt="Certification 1"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Certification 2 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="certification2.png" alt="Certification 2"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Certification 3 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="certification3.png" alt="Certification 3"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Award 1 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="ccertification4.png" alt="Award 1"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <!-- Award 2 -->
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="certification5.png" alt="Award 2"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+          <div
+            class="flex justify-center items-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:opacity-80">
+            <img src="certification6.png" alt="Award 2"
+              class="w-auto h-auto max-h-24 object-contain transition-all duration-300 ease-in-out">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Contact Section -->
+  <section id="contact" class="section-spacing bg-black/30">
+    <div class="max-w-7xl mx-auto px-6 section-content hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div class="reveal">
+          <p class="text-lg md:text-xl text-yellow-400 font-medium tracking-wide mb-4">
+            Contact Us
+          </p>
+          <h2 class="text-4xl font-bold mb-8">Get in Touch</h2>
+          <p class="text-gray-400 mb-8">Ready to experience the future of coating technology? Contact us today.</p>
+          <form class="space-y-6">
+            <div class="relative">
+              <input type="text" placeholder="Your Name"
+                class="w-full bg-black/50 border border-gray-700 rounded-lg p-4 focus:border-yellow-400 transition-colors duration-300">
+              <div class="absolute bottom--2 mt-1 left-0  w-0 h-0.5 bg-yellow-400 transition-all duration-300"></div>
+            </div>
+            <div class="relative">
+              <input type="email" placeholder="Your Email"
+                class="w-full bg-black/50 border border-gray-700 rounded-lg p-4 focus:border-yellow-400 transition-colors duration-300">
+              <div class="absolute bottom--2 mt-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300"></div>
+            </div>
+            <div class="relative">
+              <textarea placeholder="Your Message" rows="4"
+                class="w-full bg-black/50 border border-gray-700 rounded-lg p-4 focus:border-yellow-400 transition-colors duration-300"></textarea>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300"></div>
+            </div>
+            <button class="button-gradient magnetic-button w-full text-black py-4 rounded-lg font-medium">
+              Send Message
+            </button>
+          </form>
+        </div>
+        <div class="reveal">
+          <div class="bg-black/50 p-8 rounded-2xl border border-gray-800 mt-28">
+            <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <div class="text-yellow-400">
+                  <i class="fas fa-map-marker-alt text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">Address</h4>
+                  <p class="text-gray-400">123 Innovation Street, Coimbatore, Tamil Nadu, India</p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-4">
+                <div class="text-yellow-400">
+                  <i class="fas fa-phone text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">Phone</h4>
+                  <p class="text-gray-400">+91 123 456 7890</p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-4">
+                <div class="text-yellow-400">
+                  <i class="fas fa-envelope text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">Email</h4>
+                  <p class="text-gray-400">info@xlcoatings.com</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h4 class="font-semibold mb-4">Follow Us</h4>
+              <div class="flex space-x-4">
+                <a href="#"
+                  class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black/80 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="relative w-full max-w-xs mb-5">
+            <img src="logo.jpg" alt="XL Coatings" class="w-34 h-8 rounded-lg">
+          </div>
+          <p class="text-gray-400">Advanced nano-technology coating solutions for a sustainable future.</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">About Us</a>
+            </li>
+            <li><a href="#products"
+                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Products</a></li>
+            <li><a href="#gallery"
+                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Gallery</a></li>
+            <li><a href="#blog" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Products</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">EXCEL
+                CoolCoat</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">EXCEL
+                NanoSeal</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">EXCEL
+                StayClean</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">EXCEL
+                CoolTile</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">EXCEL
+                InsulX</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+          <p class="text-gray-400 mb-4">Stay updated with our latest news and insights.</p>
+          <div class="flex">
+            <input type="email" placeholder="Your email"
+              class="flex-1 bg-black/50 border border-gray-700 rounded-l-lg py-2 px-4 focus:border-yellow-400 transition-colors duration-300">
+            <button class="button-gradient px-6 rounded-r-lg">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 XL Coatings. All rights reserved.</p>
+        <div class="flex space-x-6 text-sm">
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Privacy Policy</a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Terms of Service</a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#FFD700" },
+        shape: { type: "circle" },
+        opacity: {
+          value: 0.5,
+          random: true,
+          animation: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+        },
+        size: {
+          value: 3,
+          random: true,
+          animation: { enable: true, speed: 2, size_min: 0.1, sync: false }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#FFD700",
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.5 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+
+    // GSAP Animations
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Modified reveal animations for sections
+      gsap.utils.toArray('.section-content').forEach(section => {
+        // Remove hidden class immediately
+        section.classList.remove('hidden');
+
+        gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out"
+        });
+      });
+
+      // Modified reveal animations for elements
+      gsap.utils.toArray('.reveal').forEach(element => {
+        gsap.from(element, {
+          scrollTrigger: {
+            trigger: element,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out"
+        });
+      });
+
+      // Progress bar animation
+      const updateProgressBar = () => {
+        const scroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scroll / height) * 100;
+        document.getElementById('scrollProgress').style.width = `${progress}%`;
+      };
+      window.addEventListener('scroll', updateProgressBar);
+
+
+      // Product Card Data (can be fetched from an API)
+      const productData = [
+        {
+          name: "EXCEL CoolCoat",
+          description: "Advanced thermal insulation coating",
+          image: "coolcat.png",
+        },
+        {
+          name: "EXCEL NanoSeal",
+          description: "Durable surface protection coating",
+          image: "NanoSeal.png",
+        },
+        {
+          name: "EXCEL StayClean",
+          description: "Self-cleaning coating for easy maintenance",
+          image: "StayClean.png",
+        },
+        {
+          name: "EXCEL StayCool",
+          description: "Transparent IR & UV Filtering Heat Reflective Coating for Glass",
+          image: "StayCool.png",
+        },
+        {
+          name: "EXCEL CoolTile",
+          description: "Heat Reflective Tile for Roof",
+          image: "CoolTile.png",
+        },
+        {
+          name: "EXCEL InsulX",
+          description: "Internal Thin Film Insulation Coating",
+          image: "InsulX.png",
+        },
+        // Add more products here
+      ];
+
+      // Function to create product cards dynamically
+      const productCardsContainer = document.getElementById("productCards");
+      if (productCardsContainer) {
+        productData.forEach(product => {
+          const productCard = document.createElement("div");
+          productCard.classList.add("product-card", "p-6", "rounded-2xl", "reveal");
+          productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full rounded-xl mb-4 hover-zoom"">
+                    <h3 class="text-xl font-bold mb-2 pt-8 text-yellow-400">${product.name}</h3>
+                    <p class="text-gray-400">${product.description}</p>
+                `;
+          productCardsContainer.appendChild(productCard);
+        });
+      }
+
+    });
+
+    // Mobile Menu Functionality
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const closeMenuButton = document.getElementById('closeMenuButton');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+
+    closeMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+
+    // Cursor Follower
+    const cursorFollower = document.getElementById('cursorFollower');
+    if (cursorFollower) {
+      document.addEventListener('mousemove', (e) => {
+        gsap.to(cursorFollower, {
+          x: e.clientX - 10,
+          y: e.clientY - 10,
+          duration: 0.2
+        });
+      });
+    }
+
+    // Magnetic Button Effect
+    const magneticButtons = document.querySelectorAll('.magnetic-button');
+    magneticButtons.forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const bounds = button.getBoundingClientRect();
+        const x = e.clientX - bounds.left - bounds.width / 2;
+        const y = e.clientY - bounds.top - bounds.height / 2;
+
+        gsap.to(button, {
+          x: x * 0.3,
+          y: y * 0.3,
+          duration: 0.2
+        });
+      });
+
+      button.addEventListener('mouseleave', () => {
+        gsap.to(button, {
+          x: 0,
+          y: 0,
+          duration: 0.2
+        });
+      });
+    });
+
+    // Mouse Parallax Effect
+    const parallaxContainers = document.querySelectorAll('.mouse-parallax');
+    parallaxContainers.forEach(container => {
+      const layers = container.querySelectorAll('.parallax-layer');
+      const handleParallax = (e) => {
+        const bounds = container.getBoundingClientRect();
+        const centerX = bounds.left + bounds.width / 2;
+        const centerY = bounds.top + bounds.height / 2;
+        const deltaX = (e.clientX - centerX) / 20;
+        const deltaY = (e.clientY - centerY) / 20;
+
+
+        layers.forEach(layer => {
+          gsap.to(layer, {
+            x: deltaX,
+            y: deltaY,
+            duration: 0.1, // Reduced duration for smoother movement
+            ease: "power1.out"
+          });
+        });
+      };
+
+      container.addEventListener('mousemove', handleParallax);
+
+      container.addEventListener('mouseleave', () => {
+        layers.forEach(layer => {
+          gsap.to(layer, {
+            x: 0,
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+    });
+
+    // Form Input Animations
+    const formInputs = document.querySelectorAll('input, textarea');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        const line = input.nextElementSibling;
+        if (line) {
+          line.style.width = '100%';
+        }
+      });
+
+      input.addEventListener('blur', () => {
+        const line = input.nextElementSibling;
+        if (line) {
+          line.style.width = '0';
+        }
+      });
+    });
+
+    // Smooth Scroll for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          gsap.to(window, {
+            duration: 1,
+            scrollTo: target,
+            ease: "power2.inOut"
+          });
+          // Close mobile menu if open
+          mobileMenu.classList.remove('active');
+        }
+      });
+    });
+  </script>
+  <script>
+    // Counter Animation Function
+    function animateCounter(element, start, end, duration, symbol = '') {
+      let current = start;
+      const increment = (end - start) / (duration / 20);
+
+      const counter = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+          clearInterval(counter);
+          element.textContent = Math.floor(end) + symbol;
+        } else {
+          element.textContent = Math.floor(current) + symbol;
+        }
+      }, 20);
+    }
+
+    // Initialize Counters on Scroll
+    const counters = document.querySelectorAll("#counter1, #counter2, #counter3");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(document.getElementById("counter1"), 0, 22, 3000, '+'); // Years in Business
+          animateCounter(document.getElementById("counter2"), 0, 20, 3000, '+'); // Countries Served
+          animateCounter(document.getElementById("counter3"), 0, 500, 3000, '+'); // Projects Completed
+          observer.disconnect(); // Trigger only once
+        }
+      });
+    });
+
+    // Observe the counters
+    observer.observe(counters[0]);
+  </script>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetElement = document.querySelector(this.getAttribute('href'));
+        if (targetElement) {
+          setTimeout(() => {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }, 100); // Adjust the delay as needed
+        }
+      });
+    });
+  </script>
+
+
+
+</body>
+
+</html>
