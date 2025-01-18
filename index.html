@@ -285,6 +285,17 @@
       transform: scale(1.05);
       opacity: 0.8;
     }
+
+    .glassy-smoked {
+      background: rgba(0, 0, 0, 0.6);
+      /* Semi-transparent black */
+      backdrop-filter: blur(10px);
+      /* Frosted glass effect */
+      -webkit-backdrop-filter: blur(10px);
+      /* Safari support */
+      border-radius: 8px;
+      /* Optional: Rounded corners */
+    }
   </style>
 </head>
 
@@ -311,7 +322,7 @@
           <a href="#blog" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Blog</a>
           <a href="#contact" class="text-gray-300 hover:text-yellow-400 transition-all duration-300">Contact</a>
         </div>
-        <button class="button-gradient magnetic-button text-black px-6 py-2 rounded-full font-medium">
+        <button class="hidden sm:block button-gradient magnetic-button text-black px-6 py-2 rounded-full font-medium">
           Get Started
         </button>
         <button class="md:hidden text-yellow-400" id="mobileMenuButton">
@@ -322,7 +333,7 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-black/95 z-50 p-6">
+  <div class="mobile-menu fixed top-0 right-0 h-full w-64 glassy-smoked z-50 p-6">
     <button class="absolute top-6 right-6 text-yellow-400" id="closeMenuButton">
       <i class="fas fa-times text-2xl"></i>
     </button>
